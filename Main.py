@@ -1,5 +1,9 @@
 import hashlib
-
+''' --------
+I don't think you need 'hash1' and 'salt1' here.
+You can probably get away with just having them inside letsPlay(n)
+- Ralph W.
+'''
 hash1, salt1, fileName, fileText = "", "", "password_file.txt", ""
 lineCount = 0
 
@@ -18,6 +22,7 @@ def letsPlay(n):
         print("Trying->", words[0], end='') #keep printing in the same line print("Hello", end = '') print("world")
         i, stop, zeros = 0, 9999999, 3 # increment, where to stop, number of zeros
         while i < stop:
+            ''' -------- What does the next line do? - Ralph W. '''
             x = '{:d}'.format(i).zfill(zeros)
             hex_dig = hash_with_sha256(x.replace(' ', '') + salt1)
             if hex_dig.lower().split() == hash1.lower().split():
@@ -26,6 +31,11 @@ def letsPlay(n):
                       "\n###############################################################################")
                 break
             i += 1
+            ''' --------
+            Maybe you can give a small overview of what is happening with
+            these if statements
+            - Ralph W.
+            '''
             if i == 1000 and zeros == 3:
                 # print("Ending 3 digit combinations - Restarting with 4")
                 print(".", end='') # keep printing dots in 1 line
@@ -56,3 +66,8 @@ for line in fileText: # getting line count
     lineCount += 1
 
 letsPlay(0) # start from line 0, minimum password length 3, max length 7
+''' -------- 
+Other than the few comments above, this looks really good! It runs quickly, even for the passwords of length 7.
+I think you found a good recursive solution for this problem
+- Ralph W.
+'''
